@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BAF7E4BB-BB27-4307-A63E-75D7A30AA99B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>C_SharpByeong</RootNamespace>
+    <AssemblyName>C-SharpByeong</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="017_if.cs" />
+    <Compile Include="018_Positive.cs" />
+    <Compile Include="019_Doubleif.cs" />
+    <Compile Include="020_Switch.cs" />
+    <Compile Include="021_NoBreak.cs" />
+    <Compile Include="022_for.cs" />
+    <Compile Include="023_for100.cs" />
+    <Compile Include="024_DoubleFor.cs" />
+    <Compile Include="025_While.cs" />
+    <Compile Include="026_Continue.cs" />
+    <Compile Include="027_Method1.cs" />
+    <Compile Include="028_Method2.cs" />
+    <Compile Include="029_Method3.cs" />
+    <Compile Include="030_Overloading.cs" />
+    <Compile Include="031_Array.cs" />
+    <Compile Include="032_Array2.cs" />
+    <Compile Include="033_foreach.cs" />
+    <Compile Include="034_Struct.cs" />
+    <Compile Include="035_Class.cs" />
+    <Compile Include="036_instance.cs" />
+    <Compile Include="037_instance2.cs" />
+    <Compile Include="038_Variable.cs" />
+    <Compile Include="039_ClassStruct.cs" />
+    <Compile Include="040_Constructor.cs" />
+    <Compile Include="041_Private.cs" />
+    <Compile Include="042_Constructor2.cs" />
+    <Compile Include="043_Constructor3.cs" />
+    <Compile Include="044_Constructor4.cs" />
+    <Compile Include="045_Garbage.cs" />
+    <Compile Include="046_Destructor.cs" />
+    <Compile Include="047_This.cs" />
+    <Compile Include="048_Chaning.cs" />
+    <Compile Include="049_Capsule.cs" />
+    <Compile Include="050_Property1.cs" />
+    <Compile Include="051_Property2.cs" />
+    <Compile Include="052_Property3.cs" />
+    <Compile Include="053_DoubleClass.cs" />
+    <Compile Include="054_Static1.cs" />
+    <Compile Include="055_StaticMethod.cs" />
+    <Compile Include="056_StaticClass.cs" />
+    <Compile Include="057_inherit.cs" />
+    <Compile Include="058_Protected.cs" />
+    <Compile Include="059_inherit2.cs" />
+    <Compile Include="060_Base.cs" />
+    <Compile Include="061_Constructor_init.cs" />
+    <Compile Include="062_ClassCasting.cs" />
+    <Compile Include="063_Overriding.cs" />
+    <Compile Include="064_SataticBinding.cs" />
+    <Compile Include="065_Virtual.cs" />
+    <Compile Include="066_DynamicBinding.cs" />
+    <Compile Include="067_MechodHiding.cs" />
+    <Compile Include="068_GenericMethod.cs" />
+    <Compile Include="069_GenericClass.cs" />
+    <Compile Include="070_Partial.cs" />
+    <Compile Include="071_Sealed.cs" />
+    <Compile Include="072_Region.cs" />
+    <Compile Include="073_Abstract.cs" />
+    <Compile Include="074_indexer.cs" />
+    <Compile Include="075_interface.cs" />
+    <Compile Include="076_Boxing.cs" />
+    <Compile Include="077_GenericList.cs" />
+    <Compile Include="078_GenericStack.cs" />
+    <Compile Include="079_GenericQueue.cs" />
+    <Compile Include="080_Dictionary.cs" />
+    <Compile Include="081_Search.cs" />
+    <Compile Include="082_Shorting.cs" />
+    <Compile Include="083_ArrayLinkedList.cs" />
+    <Compile Include="084_ArrayStack.cs" />
+    <Compile Include="085_ArrayQueue.cs" />
+    <Compile Include="086_Tree.cs" />
+    <Compile Include="087_Graph.cs" />
+    <Compile Include="088_Params.cs" />
+    <Compile Include="089_RefOut.cs" />
+    <Compile Include="090_Random.cs" />
+    <Compile Include="091_OperatorOverload.cs" />
+    <Compile Include="092_Delegate.cs" />
+    <Compile Include="093_DelegateChain.cs" />
+    <Compile Include="094_CallBack.cs" />
+    <Compile Include="095_Lambda.cs" />
+    <Compile Include="096_Action.cs" />
+    <Compile Include="097_Func.cs" />
+    <Compile Include="098_Asynchron.cs" />
+    <Compile Include="099_Thread.cs" />
+    <Compile Include="100_Thread2.cs" />
+    <Compile Include="101_NameSpace.cs" />
+    <Compile Include="102_Orthography.cs" />
+    <Compile Include="103_SetPosition.cs" />
+    <Compile Include="104_UpDown.cs" />
+    <Compile Include="105_Gawi.cs" />
+    <Compile Include="106_SnailMove.cs" />
+    <Compile Include="107_InputMove.cs" />
+    <Compile Include="108_SnailGame.cs" />
+    <Compile Include="109_StarMove.cs" />
+    <Compile Include="110_Snake.cs" />
+    <Compile Include="DoubleBufferTest.cs" />
+    <Compile Include="Miro.cs" />
+    <Compile Include="MyGame - 복사본.cs" />
+    <Compile Include="MyGame.cs" />
+    <Compile Include="Programmers.cs" />
+    <Compile Include="Test.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
