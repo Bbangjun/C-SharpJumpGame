@@ -14,15 +14,23 @@ namespace C_SharpByeong
 
             Random rnd = new Random();
 
+            //벽 랜덤 생성 변수
             public int rndWall;
             public int rndWall2;
+
+            //벽 좌표 변수
             public int WallX;
             int WallY;
             int WallY2;
 
+            //벽 좌표 변수
             public int Wall2X;
             public int Wall2Y;
             public int Wall2Y2;
+
+            //구름 (꾸미기)
+            public int[,] Cloud = new int[3,4];
+            public int[] CloudY = new int[3];
 
             int high = 0;
             public int level = 1;
@@ -31,15 +39,17 @@ namespace C_SharpByeong
             static string strScore;
             static char ground = '■';
 
+            //더블 버퍼
             char[,] front_buffer = new char[height, width];
             char[,] back_buffer = new char[height, width];
 
-
+            //게임 종료 여부
             public bool End = false;
 
             int count = 0;
-            public int delay = 6;
+            public int delay = 10;
 
+            //디폴트 함수
             public JumpMan()
             {
                 x = 5;
@@ -50,176 +60,45 @@ namespace C_SharpByeong
 
                 strScore = "점수 : " + score;
 
-                Console.SetWindowSize(width, height);
+                Console.SetWindowSize(width, height); //콘솔 사이즈 설정
                 Console.BackgroundColor = ConsoleColor.Blue;
             }
 
-            public void Draw()
+            public void CreateCloud(int cloud)
             {
-
-                strScore = "점수 : " + score;
-
-                front_buffer = new char[height, width];
-
-                front_buffer = back_buffer;
-
-                back_buffer = new char[height, width];
-
-
-                for (int i = 0; i < height; i++)
+                for (int i = 0; i < Cloud.GetLength(1); i++)
                 {
-                    for (int j = 0; j < width; j++)
-                    {
-                        if (i == 0 && j >= 0 && j + 1 < strScore.Length)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Black;
-                            Console.Write(front_buffer[i, j]);
-                        }
-                        else if (i == height - 1 && j < 50)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.Write(front_buffer[i, j]);
-                        }
-                        else if (i == y - 1 && j == x - 1)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Black;
-                            Console.Write(front_buffer[i, j]);
-                        }
+                    Cloud[cloud, i] = 95 + i;
+                }
+
+                int rndvalue = rnd.Next(0, 3);
+
+                switch(rndvalue)
+                {
+                    case 0:
+                        if (cloud == 0)
+                            CloudY[0] = 3;
+                        else if (cloud == 1)
+                            CloudY[1] = 4;
                         else
-                        {
-                            Console.ForegroundColor = ConsoleColor.Black;
-                            Console.Write(front_buffer[i, j]);
-                        }
-                        if (j == width - 1)
-                            Console.WriteLine();
-                    }
-                }
-                Console.SetCursorPosition(0, 0);
-            }
-
-            public void WriteBoard()
-            {
-
-                front_buffer = new char[height, width];
-
-                DrawWall(rndWall);
-
-
-                DrawWall2(rndWall2);
-
-                Draw();
-
-                for (int i = 0; i < height; i++)    // i = height 1 ~ 10 j = width 1 ~ 30
-                {
-                    for (int j = 0; j < width; j++)
-                    {
-                        if (i == 0 && j >= 0 && j < strScore.Length)
-                        {
-                            back_buffer[i, j] = strScore[j];
-                        }
-                        else if (i == height - 1 && j < 50)
-                        {
-                            back_buffer[i, j] = ground;
-                        }
-                        else if (i == y - 1 && j == x - 1)
-                        {
-                            back_buffer[i, j] = 'A';
-                        }
+                            CloudY[2] = 5;
+                        break;
+                    case 1:
+                        if (cloud == 0)
+                            CloudY[0] = 4;
+                        else if (cloud == 1)
+                            CloudY[1] = 2;
                         else
-                            back_buffer[i, j] = ' ';
-                    }
-                }
-
-                Console.SetCursorPosition(0, 0);
-
-
-
-            }
-
-            public void Input()
-            {
-                //키를 누를 수 있는지 검사
-                if (Console.KeyAvailable)
-                {
-                    keyInfo = Console.ReadKey(true);
-                    if (keyInfo.Key == ConsoleKey.Spacebar && count == 0 && high == 0)
-                    {
-                        count = 3;
-                    }
-                }
-
-            }
-
-            public void RestartInput()
-            {
-                keyInfo = Console.ReadKey(true);
-
-                if (keyInfo.Key == ConsoleKey.Y)
-                {
-                    End = false;
-                }
-                else if (keyInfo.Key == ConsoleKey.N)
-                {
-                    End = true;
-                }
-                else
-                    RestartInput();
-            }
-
-            public void DrawWall(int rndWall)
-            {
-                if (WallX > 1)
-                {
-                    switch (rndWall)
-                    {
-                        case 0:
-                            back_buffer[WallY - 1, WallX - 1] = 'l';
-                            back_buffer[WallY - 1, WallX - 2] = 'l';
-                            break;
-                        case 1:
-                            back_buffer[WallY - 1, WallX - 1] = 'l';
-                            back_buffer[WallY2 - 1, WallX - 1] = 'l';
-
-                            back_buffer[WallY - 1, WallX - 2] = 'l';
-                            back_buffer[WallY2 - 1, WallX - 2] = 'l';
-                            break;
-                        case 2:
-                            back_buffer[WallY - 1, WallX - 1] = 'l';
-                            back_buffer[WallY2 - 1, WallX - 1] = 'l';
-
-                            back_buffer[WallY - 1, WallX - 2] = 'l';
-                            back_buffer[WallY2 - 1, WallX - 2] = 'l';
-                            break;
-                    }
-                }
-            }
-
-            public void DrawWall2(int rndWall2)
-            {
-                if (Wall2X > 1)
-                {
-                    switch (rndWall2)
-                    {
-                        case 0:
-                            back_buffer[Wall2Y - 1, Wall2X - 1] = 'l';
-                            back_buffer[Wall2Y - 1, Wall2X - 2] = 'l';
-                            break;
-                        case 1:
-                            back_buffer[Wall2Y - 1, Wall2X - 1] = 'l';
-                            back_buffer[Wall2Y2 - 1, Wall2X - 1] = 'l';
-
-                            back_buffer[Wall2Y - 1, Wall2X - 2] = 'l';
-                            back_buffer[Wall2Y2 - 1, Wall2X - 2] = 'l';
-
-                            break;
-                        case 2:
-                            back_buffer[Wall2Y - 1, Wall2X - 1] = 'l';
-                            back_buffer[Wall2Y2 - 1, Wall2X - 1] = 'l';
-
-                            back_buffer[Wall2Y - 1, Wall2X - 2] = 'l';
-                            back_buffer[Wall2Y2 - 1, Wall2X - 2] = 'l';
-                            break;
-                    }
+                            CloudY[2] = 3;
+                        break;
+                    case 2:
+                        if (cloud == 0)
+                            CloudY[0] = 2;
+                        else if (cloud == 1)
+                            CloudY[1] = 5;
+                        else
+                            CloudY[2] = 6;
+                        break;
                 }
             }
 
@@ -288,6 +167,234 @@ namespace C_SharpByeong
                 return false;
             }
 
+            public void Draw()
+            {
+
+                strScore = "점수 : " + score;
+
+                front_buffer = new char[height, width];
+
+                front_buffer = back_buffer;
+
+                back_buffer = new char[height, width];
+
+
+                for (int i = 0; i < height; i++)
+                {
+                    for (int j = 0; j < width; j++)
+                    {
+                        if (i == 0 && j >= 0 && j + 1 < strScore.Length)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.Write(front_buffer[i, j]);
+                        }
+                        else if(i > 1 && i < 7)
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Write(front_buffer[i, j]);
+                        }
+                        else if (i == height - 1 && j < 50)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write(front_buffer[i, j]);
+                        }
+                        else if (i == y - 1 && j == x - 1)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.Write(front_buffer[i, j]);
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.Write(front_buffer[i, j]);
+                        }
+                        if (j == width - 1)
+                            Console.WriteLine();
+                    }
+                }
+                Console.SetCursorPosition(0, 0);
+            }
+
+            public void DrawCloud()
+            {
+                if(Cloud[0, 3] == 0)
+                {
+                    CreateCloud(0);
+                }
+                
+                if(Cloud[0, 3] == 60)
+                {
+                    CreateCloud(1);
+                }
+
+                if (Cloud[0, 3] == 30)
+                {
+                    CreateCloud(2);
+                }
+
+                for (int i = 0; i < Cloud.GetLength(0); i++)
+                {
+                    if(Cloud[0,3] > 0)
+                        for (int j = 0; j < Cloud.GetLength(1); j++)
+                        {
+                            back_buffer[CloudY[0], Cloud[0, j]] = '●';
+                        }
+
+                    if (Cloud[1, 3] > 0)
+                        for (int j = 0; j < Cloud.GetLength(1); j++)
+                        {
+                            back_buffer[CloudY[1], Cloud[1, j]] = '●';
+                        }
+
+                    if (Cloud[2, 3] > 0)
+                        for (int j = 0; j < Cloud.GetLength(1); j++)
+                        {
+                            back_buffer[CloudY[2], Cloud[2, j]] = '●';
+                        }
+                }
+            }
+
+            public void DrawWall(int rndWall)
+            {
+                if (WallX > 1)
+                {
+                    switch (rndWall)
+                    {
+                        case 0:
+                            back_buffer[WallY - 1, WallX - 1] = 'l';
+                            back_buffer[WallY - 1, WallX - 2] = 'l';
+                            break;
+                        case 1:
+                            back_buffer[WallY - 1, WallX - 1] = 'l';
+                            back_buffer[WallY2 - 1, WallX - 1] = 'l';
+
+                            back_buffer[WallY - 1, WallX - 2] = 'l';
+                            back_buffer[WallY2 - 1, WallX - 2] = 'l';
+                            break;
+                        case 2:
+                            back_buffer[WallY - 1, WallX - 1] = 'l';
+                            back_buffer[WallY2 - 1, WallX - 1] = 'l';
+
+                            back_buffer[WallY - 1, WallX - 2] = 'l';
+                            back_buffer[WallY2 - 1, WallX - 2] = 'l';
+                            break;
+                    }
+                }
+            }
+
+            public void DrawWall2(int rndWall2)
+            {
+                if (Wall2X > 1)
+                {
+                    switch (rndWall2)
+                    {
+                        case 0:
+                            back_buffer[Wall2Y - 1, Wall2X - 1] = 'l';
+                            back_buffer[Wall2Y - 1, Wall2X - 2] = 'l';
+                            break;
+                        case 1:
+                            back_buffer[Wall2Y - 1, Wall2X - 1] = 'l';
+                            back_buffer[Wall2Y2 - 1, Wall2X - 1] = 'l';
+
+                            back_buffer[Wall2Y - 1, Wall2X - 2] = 'l';
+                            back_buffer[Wall2Y2 - 1, Wall2X - 2] = 'l';
+
+                            break;
+                        case 2:
+                            back_buffer[Wall2Y - 1, Wall2X - 1] = 'l';
+                            back_buffer[Wall2Y2 - 1, Wall2X - 1] = 'l';
+
+                            back_buffer[Wall2Y - 1, Wall2X - 2] = 'l';
+                            back_buffer[Wall2Y2 - 1, Wall2X - 2] = 'l';
+                            break;
+                    }
+                }
+            }
+
+            public void WriteBoard()
+            {
+
+                front_buffer = new char[height, width];
+
+                DrawWall(rndWall);
+
+
+                DrawWall2(rndWall2);
+
+                DrawCloud();
+
+                Draw();
+
+
+                for (int i = 0; i < Cloud.GetLength(0); i++)
+                {
+                    for (int j = 0; j < Cloud.GetLength(1); j++)
+                    {
+
+                        if (Cloud[i, j] > 0)
+                            Cloud[i, j]--;
+                    }
+                }
+
+                for (int i = 0; i < height; i++)    // i = height 1 ~ 10 j = width 1 ~ 30
+                {
+                    for (int j = 0; j < width; j++)
+                    {
+                        if (i == 0 && j >= 0 && j < strScore.Length)
+                        {
+                            back_buffer[i, j] = strScore[j];
+                        }
+                        else if (i == height - 1 && j < 50)
+                        {
+                            back_buffer[i, j] = ground;
+                        }
+                        else if (i == y - 1 && j == x - 1)
+                        {
+                            back_buffer[i, j] = 'A';
+                        }
+                        else
+                            back_buffer[i, j] = ' ';
+                    }
+                }
+
+                Console.SetCursorPosition(0, 0);
+
+
+
+            }
+
+            public void Input()
+            {
+                //키를 누를 수 있는지 검사
+                if (Console.KeyAvailable)
+                {
+                    keyInfo = Console.ReadKey(true);
+                    if (keyInfo.Key == ConsoleKey.Spacebar && count == 0 && high == 0)
+                    {
+                        count = 3;
+                    }
+                }
+
+            }
+
+            public void RestartInput()
+            {
+                keyInfo = Console.ReadKey(true);
+
+                if (keyInfo.Key == ConsoleKey.Y)
+                {
+                    End = false;
+                }
+                else if (keyInfo.Key == ConsoleKey.N)
+                {
+                    End = true;
+                }
+                else
+                    RestartInput();
+            }
+
+
+
             public void ReStart()
             {
                 Console.SetCursorPosition(1, 1);
@@ -304,8 +411,6 @@ namespace C_SharpByeong
 
                 do
                 {
-
-
                     if (WallX == 50)
                         CreateWall2();
 
@@ -378,18 +483,11 @@ namespace C_SharpByeong
                     WallX--;
                     System.Threading.Thread.Sleep(delay);
                     score++;
-                    /*
+
                     if (score % 100 == 0)
-                    {
-                        delay -= 10;
-                        if (delay < 30)
-                            delay = 30;
-                    }
-                    if (score % 200 == 0)
-                    {
-                        x++;
-                        level++;
-                    }*/
+                        delay--;
+                    if (delay < 3)
+                        delay = 3;
                 } while (WallX > level);
 
 
@@ -397,7 +495,7 @@ namespace C_SharpByeong
             }
 
         }
-        static void Main1(string[] args)
+        static void Main(string[] args)
         {
             JumpMan man = new JumpMan();
             Random rnd = new Random();
@@ -405,6 +503,7 @@ namespace C_SharpByeong
 
             while (true)
             {
+                //man.CreateCloud(0);
                 man.CreateWall();
                 man.Logic();
 
@@ -417,7 +516,7 @@ namespace C_SharpByeong
                         man.y = 29;
                         man.x = 5;
                         man.level = 1;
-                        man.delay = 30;
+                        man.delay = 10;
                         man.Wall2X = 0;
                         man.Wall2Y = 0;
                         man.Wall2Y2 = 0;

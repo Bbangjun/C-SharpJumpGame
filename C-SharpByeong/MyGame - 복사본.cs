@@ -397,7 +397,7 @@ namespace C_SharpByeong
             }
 
         }
-        static void Main(string[] args)
+        static void Main1(string[] args)
         {
             JumpMan man = new JumpMan();
             Random rnd = new Random();
