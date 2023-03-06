@@ -160,7 +160,7 @@ namespace C_SharpByeong
                 {
                     Console.SetCursorPosition(0, 0);
                     WriteBoard();
-                    Console.SetCursorPosition(5, 5);
+                    Console.SetCursorPosition(30, 14);
                     Console.Write("게임 오버!");
                     return true;
                 }
@@ -400,9 +400,9 @@ namespace C_SharpByeong
 
             public void ReStart()
             {
-                Console.SetCursorPosition(1, 1);
+                Console.SetCursorPosition(30, 15);
                 Console.Write("재도전? Y/N");
-                Console.SetCursorPosition(1, 2);
+                Console.SetCursorPosition(30, 16);
                 Console.Write("최종 점수 : " + (score - 1));
                 RestartInput();
             }
