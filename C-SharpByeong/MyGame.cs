@@ -104,7 +104,7 @@ namespace C_SharpByeong
 
             public void CreateWall()
             {
-                if (WallX == level)
+                if (WallX <= 1)
                 {
                     rndWall = rnd.Next(0, 3);
                 }
@@ -130,7 +130,7 @@ namespace C_SharpByeong
 
             public void CreateWall2()
             {
-                if (Wall2X == level)
+                if (Wall2X <= 1)
                 {
                     rndWall2 = rnd.Next(0, 3);
                 }
@@ -319,9 +319,12 @@ namespace C_SharpByeong
                 DrawWall(rndWall);
 
 
+
                 DrawWall2(rndWall2);
 
                 DrawCloud();
+
+
 
                 Draw();
 
@@ -400,7 +403,7 @@ namespace C_SharpByeong
                 Console.SetCursorPosition(1, 1);
                 Console.Write("재도전? Y/N");
                 Console.SetCursorPosition(1, 2);
-                Console.Write("최종 점수 : " + score);
+                Console.Write("최종 점수 : " + (score - 1));
                 RestartInput();
             }
 
@@ -411,7 +414,8 @@ namespace C_SharpByeong
 
                 do
                 {
-                    if (WallX == 50)
+
+                    if (WallX == 49)
                         CreateWall2();
 
                     Console.SetCursorPosition(0, 0);
@@ -445,8 +449,8 @@ namespace C_SharpByeong
                             }
                             WriteBoard();
 
-                            Wall2X--;
-                            WallX--;
+                            Wall2X -= 2;
+                            WallX -= 2;
                             score++;
                             System.Threading.Thread.Sleep(delay);
 
@@ -479,8 +483,8 @@ namespace C_SharpByeong
                     WriteBoard();
 
                     if (Wall2X != 0)
-                        Wall2X--;
-                    WallX--;
+                        Wall2X -= 2;
+                    WallX -= 2;
                     System.Threading.Thread.Sleep(delay);
                     score++;
 
@@ -488,7 +492,7 @@ namespace C_SharpByeong
                         delay--;
                     if (delay < 3)
                         delay = 3;
-                } while (WallX > level);
+                } while (WallX > 1);
 
 
 
